@@ -1,0 +1,28 @@
+https://github.com/codebude/QRCoder
+
+
+Nuget
+------------------------------------------------------------------------------------------------------------
+System.Drawing.Common
+QRCoder by Raffael Herrmann vison 1.4.1
+
+------------------------------------------------------------------------------------------------------------
+public byte[] ImageToByArray(System.Drawing.Image image)
+{
+    MemoryStream memoryStream = new MemoryStream();
+    image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+    return memoryStream.ToArray();
+}
+
+[HttpGet("GenerateQRCode")]
+public IActionResult GenerateQRCode(string QRCodeText)
+{
+    QRCodeGenerator qrGenerator = new QRCodeGenerator();
+    QRCodeData qrCodeData = qrGenerator.CreateQrCode(QRCodeText, QRCodeGenerator.ECCLevel.Q);
+    QRCode qrCode = new QRCode(qrCodeData);
+    Image qrCodeImage = qrCode.GetGraphic(20);
+
+    var bytes = ImageToByArray(qrCodeImage);
+
+    return File(bytes, "image/bmp");
+}
