@@ -1,0 +1,51 @@
+Config sql:
+appsettings:
+"ConnectionStrings": {
+  "DefaultConnection": "Data Source=LAPTOP-A9GS4BGD;Initial Catalog=TShop;Integrated Security=True;"
+}
+
+---------------------------------------------------------------------------------------------------
+ValuesController
+private readonly IConfiguration _configuration;
+
+public ValuesController(IConfiguration configuration)
+{
+    _configuration = configuration;
+}
+
+[HttpGet]
+[Route("GetAllProduct")]
+public List<Product> GetAllProduct()
+{
+    List<Product> products = new List<Product>();
+
+    SqlConnection sqlConnection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+    SqlCommand sqlCommand = new SqlCommand("Select * From Product", sqlConnection);
+    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+    DataTable dataTable = new DataTable();
+    sqlDataAdapter.Fill(dataTable);
+
+    for (int i = 0; i < dataTable.Rows.Count; i++)
+    {
+        Product product = new Product();
+        product.IdProduct = int.Parse(dataTable.Rows[i]["IdProduct"].ToString());
+        product.ProductName = dataTable.Rows[i]["NameProduct"].ToString();
+        product.ProductDescription = dataTable.Rows[i]["Description"].ToString();
+
+        products.Add(product);
+    }
+
+    return products;
+}
+
+[HttpPost]
+[Route("SaveProduct")]
+public string SaveProduct(Product product)
+{
+    SqlConnection sqlConnection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+    SqlCommand sqlCommand = new SqlCommand("insert into Product values ('', '', '')", sqlConnection);
+    sqlConnection.Open();
+    sqlCommand.ExecuteNonQuery();
+    sqlConnection.Close();
+    return "Successfully";
+}
