@@ -1,3 +1,5 @@
+Add Nuget Microsoft.Data.SqlClient
+
 Config sql:
 appsettings:
 "ConnectionStrings": {
