@@ -1,0 +1,42 @@
+1. Install package
+Install package Ocelot trong project OcelotGateway
+
+2.Config: Config Ocelot
+- 
+builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true); 
+builder.Services.AddOcelot(builder.Configuration);
+-
+app.UseOcelot();
+
+Create file ocelot.json
+- DownstreamPathTemplate, Downstreamscheme and DownstreamHostAndports define the URL to which the request will be routed.
+- UpstreamPathTemplate is the URL that Ocelot will use to determine the DownstreamPathTemplate to use for a request. For example, according to the config above, when a client enters the url /posts/{postId}, it will be mapped to the service at localhost:80/api/post/{postId}
+
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/cart-api/cart/first",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 6001
+        }
+      ],
+      "UpstreamPathTemplate": "/cart-gateway/cart/first",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/product-api/{controller}/{action}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/product-gateway/{controller}/{action}",
+      "UpstreamHttpMethod": [ "GET" ]
+    }
+  ]  
+}
