@@ -1,0 +1,73 @@
+Overview:
+1 Temporary Data Storage: IMemoryCache allows storing data in temporary memory to minimize the time spent accessing data from the primary data source, such as a database or external services.
+2 Key-Value Store: Data in IMemoryCache is stored in key-value pairs, making data retrieval quick and efficient.
+3 Provides Core Methods: IMemoryCache provides methods such as Set, Get, and Remove to manage items in the cache.
+4 Management of Item Lifetimes: You can configure the lifetime (expiration) of items in the cache to ensure that stored data remains fresh and up-to-date.
+5 Suitable for Web Applications: IMemoryCache is often used in web applications to store temporary data such as query results, computed results, or any data that can be quickly retrieved from memory.
+6 Integration with Dependency Injection: IMemoryCache is commonly used alongside Dependency Injection in ASP.NET Core to provide an easy and flexible way to manage cache memory in applications.
+
+Implementing Cache
+1. Create Cache class CacheModelData
+private static readonly IMemoryCache _memoryCache = new MemoryCache(new MemoryCacheOptions());
+
+ public static void AddCache(string cachekey, int value)
+ {
+     var cacheExpiryOptions = new MemoryCacheEntryOptions
+     {
+         AbsoluteExpiration = DateTime.Now.AddSeconds(60),
+         Priority = CacheItemPriority.High,
+         SlidingExpiration = TimeSpan.FromSeconds(20)
+     };
+     _memoryCache.Set(cachekey, value, cacheExpiryOptions);
+ }
+
+Explanation:
+- This code snippet creates a MemoryCacheEntryOptions object and configures the options for storing items in the memory cache. Here's the detailed explanation of the options:
+
+1. AbsoluteExpiration:
+This is the absolute time when the item in the cache will expire and be removed.
+In this example, the expiration time is set to DateTime.Now.AddSeconds(60), which means 60 seconds from the current time.
+2. Priority:
+This is the priority level of the item in the cache.
+It can have values like CacheItemPriority.Low, CacheItemPriority.Normal, CacheItemPriority.High, and CacheItemPriority.NeverRemove.
+In this example, the priority is set to CacheItemPriority.High.
+3. SlidingExpiration:
+This is a time span after which the item in the cache will expire if it's not accessed.
+If the item is accessed within this time span, the expiration time will be extended.
+In this example, TimeSpan.FromSeconds(20) represents a time span of 20 seconds.
+
+
+ public static int GetCache(string cachekey)
+ {
+     var result = _memoryCache.Get(cachekey);
+     return Convert.ToInt32(result);
+ }
+
+
+ public static void RemoveCache(string cachekey)
+ {
+     _memoryCache.Remove(cachekey);
+ }
+
+2. Use Controller
+
+ [HttpGet("AddCache")]
+ public string AddCache()
+ {
+     CacheModelData.AddCache("test", 100);
+     return "Added.";
+ }
+
+ [HttpGet("GetCache")]
+ public int GetCache()
+ {
+     var result = CacheModelData.GetCache("test");
+     return result;
+ }
+
+ [HttpGet("RemoveCache")]
+ public string RemoveCache()
+ {
+     CacheModelData.RemoveCache("test");
+     return "Removed.";
+ }
