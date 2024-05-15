@@ -1,0 +1,150 @@
+Use AJAX combined with jQuery
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX with jQuery Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #dataContainer {
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>AJAX with jQuery Example</h1>
+    <button id="loadDataBtn">Load Data</button>
+    <div id="dataContainer"></div>
+
+    <script>
+        $(document).ready(function() {
+            $("#loadDataBtn").click(function() {
+                $.ajax({
+                    url: "https://jsonplaceholder.typicode.com/posts/1",
+                    type: "GET",
+                    success: function(data) {
+                        $("#dataContainer").html(`
+                            <h2>${data.title}</h2>
+                            <p>${data.body}</p>
+                        `);
+                    },
+                    error: function(error) {
+                        $("#dataContainer").html('<p class="error">An error occurred while fetching the data.</p>');
+                        console.log("Error:", error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+---------------------------------------------------------------------------------------------------------------------------------------
+Using XMLHttpRequest
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX with XMLHttpRequest Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #dataContainer {
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>AJAX with XMLHttpRequest Example</h1>
+    <button id="loadDataBtn">Load Data</button>
+    <div id="dataContainer"></div>
+
+    <script>
+        document.getElementById("loadDataBtn").addEventListener("click", function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://jsonplaceholder.typicode.com/posts/1", true);
+
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    var data = JSON.parse(xhr.responseText);
+                    document.getElementById("dataContainer").innerHTML = `
+                        <h2>${data.title}</h2>
+                        <p>${data.body}</p>
+                    `;
+                } else {
+                    document.getElementById("dataContainer").innerHTML = '<p class="error">An error occurred while fetching the data.</p>';
+                }
+            };
+
+            xhr.onerror = function() {
+                document.getElementById("dataContainer").innerHTML = '<p class="error">An error occurred while fetching the data.</p>';
+            };
+
+            xhr.send();
+        });
+    </script>
+</body>
+</html>
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Using the Fetch API
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX with Fetch API Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #dataContainer {
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>AJAX with Fetch API Example</h1>
+    <button id="loadDataBtn">Load Data</button>
+    <div id="dataContainer"></div>
+
+    <script>
+        document.getElementById("loadDataBtn").addEventListener("click", function() {
+            fetch("https://jsonplaceholder.typicode.com/posts/1")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById("dataContainer").innerHTML = `
+                        <h2>${data.title}</h2>
+                        <p>${data.body}</p>
+                    `;
+                })
+                .catch(error => {
+                    document.getElementById("dataContainer").innerHTML = '<p class="error">An error occurred while fetching the data.</p>';
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        });
+    </script>
+</body>
+</html>
+----------------------------------------------------------------------------------------------------------------------------------------------
+Choosing a Method
+jQuery: If you are already using jQuery in your project, it makes sense to continue using it for AJAX requests.
+XMLHttpRequest: Used when it is necessary to ensure support on all browsers, even very old browsers.
+Fetch API: Use if you are working with modern browsers or don't mind using polyfills for older browsers.
+
+
