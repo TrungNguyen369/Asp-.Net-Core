@@ -1,3 +1,16 @@
+[HttpGet]
+    public IActionResult GetCustomers()
+    {
+        var customers = new List<Customer>
+        {
+            new Customer { ID = 1, CompanyName = "Customer 1", City = "City 1", State = "State 1", Phone = "123456789", Fax = "987654321" },
+            new Customer { ID = 2, CompanyName = "Customer 2", City = "City 2", State = "State 2", Phone = "987654321", Fax = "123456789" },
+            // Thêm dữ liệu giả lập khác ở đây
+        };
+
+        return Json(customers);
+    }
+
 <script>
     $(() => {
         $.ajax({
