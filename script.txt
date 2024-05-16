@@ -54,3 +54,5 @@ document.getElementById('getDateTimeBtn').addEventListener('click', function() {
         alert('Please select a time.');
     }
 });
+--------------------------------------------------------------------------------------------------------------------
+var end = DateTime.Now.ToString("HH:mm");
