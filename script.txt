@@ -1,0 +1,43 @@
+<script>
+    $(() => {
+        $.ajax({
+            type: 'GET',
+            url: '/Home/GetCustomers', // Đường dẫn tới phương thức trong controller
+            success: function (data) {
+                $('#gridContainer').dxDataGrid({
+                    dataSource: data,
+                    columns: ['CompanyName', 'City', 'State', 'Phone', 'Fax'], // Định nghĩa các cột bạn muốn hiển thị
+                    showBorders: true,
+                });
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+document.getElementById('getDateTimeBtn').addEventListener('click', function() {
+    // Lấy giá trị của thẻ <input type="time">
+    var timeValue = document.getElementById('input').value;
+
+    if (timeValue) {
+        // Lấy ngày hiện tại
+        var currentDate = new Date();
+        var year = currentDate.getFullYear();
+        var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+        var day = String(currentDate.getDate()).padStart(2, '0');
+
+        // Kết hợp ngày hiện tại với giá trị thời gian
+        var dateTimeValue = `${year}-${month}-${day}T${timeValue}:00`;
+
+        // Hiển thị giá trị này trong thẻ <p>
+        document.getElementById('displayDateTime').innerText = 'Full DateTime: ' + dateTimeValue;
+
+        // Ghi giá trị này vào console
+        console.log('Full DateTime:', dateTimeValue);
+    } else {
+        alert('Please select a time.');
+    }
+});
