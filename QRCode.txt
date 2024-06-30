@@ -1,0 +1,49 @@
+static void Main()
+    {
+        string qrCodeText = "Your text here";
+        string filePath = @"C:\path\to\your\QRCodeImage.jpg";
+
+        // Generate the QR Code
+        QRCodeGenerator qrGenerator = new QRCodeGenerator();
+        QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrCodeText, QRCodeGenerator.ECCLevel.Q);
+        QRCode qrCode = new QRCode(qrCodeData);
+        Image qrCodeImage = qrCode.GetGraphic(20);
+
+        // Convert the image to byte array
+        byte[] bytes = ImageToByteArray(qrCodeImage);
+
+        // Save the image to file
+        SaveFile(filePath, bytes);
+        Console.WriteLine("QR Code image saved successfully.");
+
+        // Check if the file exists and delete it
+        if (File.Exists(filePath))
+        {
+            DeleteFile(filePath);
+            Console.WriteLine("QR Code image deleted successfully.");
+        }
+        else
+        {
+            Console.WriteLine("File not found.");
+        }
+    }
+
+    public static byte[] ImageToByteArray(Image image)
+    {
+        using (MemoryStream memoryStream = new MemoryStream())
+        {
+            image.Save(memoryStream, ImageFormat.Jpeg);
+            return memoryStream.ToArray();
+        }
+    }
+
+    public static void SaveFile(string path, byte[] data)
+    {
+        File.WriteAllBytes(path, data);
+    }
+
+    public static void DeleteFile(string path)
+    {
+        File.Delete(path);
+    }
+}
