@@ -1,0 +1,69 @@
+Swashbuckle
+Swashbuckle là một thư viện tạo tài liệu API đẹp mắt, bao gồm cả giao diện người dùng Swagger, để khám phá và kiểm tra các hoạt động của API. Điều này có thể được cấu hình trong dự án của bạn và sẽ chỉ mất vài phút để bắt đầu.
+
+GitHub: https://github.com/domaindrivendev/Swashbuckle.AspNetCore
+Giấy phép: MIT
+Số sao: 2,8k
+Polly
+Polly cho phép các nhà phát triển thể hiện khả năng phục hồi và các chính sách xử lý lỗi tạm thời như Retry, Circuit Breaker, Timeout, Bulkhead Isolation và Fallback một cách trôi chảy và an toàn.
+
+GitHub:https://github.com/App-vNext/Polly
+Giấy phép: BSD-3-Clause
+Số sao: 6,9k
+AutoMapper
+AutoMapper là một thư viện ánh xạ đối tượng-đối tượng phổ biến được sử dụng để ánh xạ các thuộc tính của hai đối tượng khác nhau. Điều này sẽ làm giảm công việc của nhà phát triển và giúp chúng ta tránh mã không mong muốn khi ánh xạ các giá trị.
+
+GitHub:https://github.com/AutoMapper/AutoMapper
+Giấy phép: MIT
+Số sao: 6,9k
+SaasKit
+Việc xây dựng các ứng dụng cho nhiều đối tượng khách hàng thuê là khá khó khăn. Nhưng thư viện này làm cho việc thêm nhiều kiểu thuê bao trở nên đơn giản nhất có thể. Thư viện này sử dụng khái niệm thêm phần mềm trung gian (middleware) bằng giao diện OWIN. Tác giả của thư viện này đã viết nhiều bài đăng trên blog về cách cấu hình SaasKit. Kiểm tra blog ra để biết thêm chi tiết.
+
+GitHub:https://github.com/saaskit/saaskit
+Giấy phép: Apache License 2.0
+Số sao: 5,6k
+AspNetCore.Diagnostics.HealthChecks
+Dự án này là một công cụ BeatPulse dùng để kiểm tra sức khỏe của ứng dụng. Nó còn cung cấp cổng giao diện người dùng cho tính năng mới có trong phiên bản ASP.NET Core 2.2 của Microsoft Health Checks.
+
+Sử dụng thư viện này, chúng ta có thể theo dõi kiểm tra sức khỏe cho tất cả các ứng dụng, cơ sở dữ liệu, API, dịch vụ Azure, v.v. Thư viện này có thể tạo giao diện người dùng đẹp để hiển thị kiểm tra sức khỏe.
+
+AspNetCore.Diagnostics.HealthChecks
+GitHub:https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
+Giấy phép: Apache License 2.0
+Số sao: 1.1k
+MailKit
+MailKit là một thư viện ứng dụng main client đa nền tảng được xây dựng trên MimeKit. Mục tiêu của dự án này là cung cấp cho thế giới .NET các triển khai ứng dụng khách SMTP, POP3 và IMAP mạnh mẽ, đầy đủ tính năng và tuân thủ RFC.
+
+GitHub:https://github.com/jstedfast/MailKit
+Giấy phép: MIT
+Số sao: 3k
+CacheManager
+CacheManager là một lớp trừu tượng mã nguồn mở được viết bằng C# cho .NET. Nó hỗ trợ các nhà cung cấp bộ nhớ đệm khác nhau và kết hợp các tính năng nâng cao khác.
+
+Mục tiêu chính của gói CacheManager là làm cho cuộc sống của các nhà phát triển dễ dàng hơn trong việc xử lý các tình huống bộ nhớ đệm rất phức tạp.
+
+GitHub:https://github.com/MichaCo/CacheManager
+Giấy phép: Apache-2.0
+Số sao: 1,6k
+Dapper
+Dapper là một trình ánh xạ đối tượng đơn giản cho .NET. Dapper là một Micro-ORM hiệu suất cao hỗ trợ SQL Server, MySQL, Sqlite, SqlCE, Firebird, v.v.
+
+Dapper có thể được sử dụng chỉ bằng cách cài đặt gói NuGet, gói này mở rộng chức năng cho interface IDbConnection. Trang web Stack Overflow quen thuộc đang sử dụng thư viện này.
+
+GitHub:https://github.com/StackExchange/Dapper
+Giấy phép: Apache-2.0
+Số sao: 11,8k
+Ocelot
+Ocelot là một API Gateway cho nền tảng NET. Dự án này dành cho những người sử dụng .NET hoặc .NET Core để chạy một microservices hoặc kiến ​​trúc hướng dịch vụ (SOA) yêu cầu một điểm vào hệ thống thống nhất. Nó sẽ hoạt động với bất kỳ thứ gì sử dụng HTTP. Nó chạy trên bất kỳ nền tảng nào hỗ trợ ASP.NET Core.
+
+GitHub:https://github.com/ThreeMammals/Ocelot
+Giấy phép: MIT
+Số sao : 4,5k
+NLog
+NLog là một công cụ ghi log mã nguồn mở để sử dụng trong các ứng dụng .NET và Xamarin. Nó miễn phí, đa nền tảng, dễ thiết lập và mở rộng.
+
+NLog là một ứng dụng ghi log dễ sử dụng với các tính năng quản lý và định tuyến nhật ký tuyệt vời, là một lựa chọn tốt khi lựa chọn một hệ thống ghi log hiệu suất cao.
+
+GitHub:https://github.com/NLog/NLog
+Giấy phép: BSD 3-Clause
+Số sao: 4,2k
